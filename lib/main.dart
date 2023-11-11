@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/feature/auth/login/page/login.dart';
-import 'package:flutter_application_1/feature/home/home.dart';
+import 'package:flutter_application_1/feature/home/page/home.dart';
 import 'package:flutter_application_1/feature/splash_screeen/splashScreen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Auth',
       routes: {
         '/': (context) => const SplashScreen(
-              child: LoginPage(),
+              authorize: HomePage(),
+              notAuthorize: LoginPage(),
             ),
         '/login': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),

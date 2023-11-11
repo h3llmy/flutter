@@ -16,6 +16,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  SecureStorage storage = SecureStorage();
   Future<LoginDto>? _futureLogin;
   String? _usernameError;
   String? _passwordError;
@@ -53,7 +54,6 @@ class _LoginPageState extends State<LoginPage> {
               );
             case ConnectionState.done:
               if (snapshot.hasData) {
-                SecureStorage storage = SecureStorage();
                 storage.write("token", snapshot.data!.refreshToken);
                 Future.delayed(Duration.zero, () {
                   Navigator.pushNamed(context, "/home");
