@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/global/utils/secureStorage.dart';
 
 class SplashScreen extends StatefulWidget {
   final Widget? child;
@@ -10,13 +9,9 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  SecureStorage storage = SecureStorage();
   @override
-  void initState() async {
+  void initState() {
     Future.delayed(const Duration(seconds: 2), () {
-      // String? isLogined = await storage.read('refreshToken');
-      // print(isLogined);
-      // if (isLogined.toString().isNotEmpty) {}
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => widget.child!),

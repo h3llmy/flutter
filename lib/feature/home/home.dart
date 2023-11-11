@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   void _backToHome(BuildContext context) {
-    Navigator.pushNamed(context, '/');
+    Navigator.pushNamed(context, '/login');
   }
 
   @override
