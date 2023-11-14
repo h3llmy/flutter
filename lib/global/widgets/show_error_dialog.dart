@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-showErrorDialog(BuildContext context, String message) {
+void showErrorDialog(BuildContext context, String message) {
   Future.delayed(Duration.zero, () {
     showDialog(
       context: context,

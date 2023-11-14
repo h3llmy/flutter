@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/global/utils/secure_storage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  SecureStorage storage = SecureStorage();
   void _backToHome(BuildContext context) {
-    Navigator.pushNamed(context, '/');
+    storage.deleteAll();
+    Navigator.pushNamed(context, '/login');
   }
 
   @override
@@ -18,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text("Home Page"),
+        title: const Text("Home"),
       ),
       body: Center(
         child: ElevatedButton(

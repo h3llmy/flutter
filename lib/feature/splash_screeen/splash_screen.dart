@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/global/utils/secureStorage.dart';
+import 'package:flutter_application_1/global/utils/secure_storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 class SplashScreen extends StatefulWidget {
-  final Widget? authorize;
-  final Widget? notAuthorize;
-  const SplashScreen({super.key, this.authorize, this.notAuthorize});
+  final Widget? authorized;
+  final Widget? unauthorized;
+  const SplashScreen({super.key, this.authorized, this.unauthorized});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  SecureStorage storage = SecureStorage();
+  final SecureStorage storage = SecureStorage();
 
   @override
   void initState() {
@@ -25,24 +25,24 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<dynamic> redirectNext() {
     return Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => widget.authorize!),
-        (route) => false);
+        MaterialPageRoute(builder: (context) => widget.authorized!),
+        (route) => true);
   }
 
   Future<dynamic> redirectBack() {
     return Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => widget.notAuthorize!),
-        (route) => false);
+        MaterialPageRoute(builder: (context) => widget.unauthorized!),
+        (route) => true);
   }
 
   void checkAuthToken() async {
     String? authToken = await storage.read('token');
     if (authToken != null && authToken.isNotEmpty) {
-      if (!JwtDecoder.isExpired(authToken)) {
-        redirectNext();
-      } else {
+      if (JwtDecoder.isExpired(authToken)) {
         redirectBack();
+      } else {
+        redirectNext();
       }
     } else {
       redirectBack();
